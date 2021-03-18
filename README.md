@@ -5,7 +5,7 @@
 
 # Ortho-shot Architecture
 <p align="center">
-  <img width="700" height="400" src="imgs/OrthoShot3.png">
+  <img width="700" height="380" src="imgs/OrthoShot3.png">
 </p>
 ## Installation
 
