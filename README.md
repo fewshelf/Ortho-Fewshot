@@ -3,7 +3,7 @@
 
 ## Installation
 
-This repo was tested with Ubuntu 16.04.5 LTS, Python 3.5, PyTorch 0.4.0, and CUDA release 7.5.
+This repo was tested with Ubuntu 16.04.5 LTS, Python 3.6, PyTorch 0.4.0, and CUDA release 7.5.
 | PyTorch versions >=0.4.0 | we used PyTorch versions 1.1.0
 
 ## Download Data
