@@ -1,7 +1,7 @@
 # Ortho-shot
 <!-- <img src='imgs/OrthoShot3.png' width=600/, align='centre'> -->
 <p align="center">
-  <img width="800" height="600" src="imgs/OrthoShot3.png">
+  <img width="1100" height="600" src="imgs/OrthoShot3.png">
 </p>
 ## Installation
 
