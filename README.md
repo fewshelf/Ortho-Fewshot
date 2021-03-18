@@ -1,5 +1,5 @@
 # Ortho-shot
-<img src='imgs/OrthoShot3.png' width=600/>
+<img src='imgs/OrthoShot3.png' width=600/, align='centre'>
 
 ## Installation
 
