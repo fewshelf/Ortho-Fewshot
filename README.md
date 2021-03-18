@@ -1,6 +1,6 @@
 # Ortho-shot
 <p align="center">
-  <img width="500" height="200" src="imgs/OrthoShot-CAM.png">
+  <img width="800" height="100" src="imgs/OrthoShot-CAM.png">
 </p>
 
 <p align="center">
