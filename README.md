@@ -2,11 +2,8 @@
 <p align="center">
   <img width="700" height="180" src="imgs/OrthoShot-CAM.png">
 </p>
-Figure 3: Illustration of CAM plots. (a) the second row represents CAM plots for single classes. The red squares highlight
-regions of interest clearly highlighted by the model.(b) show more complex scenarios where multi classes are involved.
-classes are clearly separated form non-classes of interest. in (c), all the objects separated by bounding boxes are clearly
-localised as indicated by the cam plot
-#########################
+Figure 3: Illustration of CAM plots. 
+# Ortho-shot Architecture
 <p align="center">
   <img width="700" height="400" src="imgs/OrthoShot3.png">
 </p>
