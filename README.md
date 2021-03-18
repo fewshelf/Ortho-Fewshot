@@ -3,7 +3,7 @@
   <img width="1400" height="250" src="imgs/OrthoShot-CAM.png">
 </p>
 
-# Ortho-shot Architecture
+# Architecture
 <p align="center">
   <img width="700" height="380" src="imgs/OrthoShot3.png">
 </p>
