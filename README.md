@@ -5,7 +5,7 @@
 
 # Architecture
 <p align="center">
-  <img width="1200" height="500" src="imgs/OrthoShot3.png">
+  <img width="1200" height="450" src="imgs/OrthoShot3.png">
 </p>
 ## Installation
 
