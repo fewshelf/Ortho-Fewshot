@@ -29,7 +29,7 @@ def parse_option():
 
     # load pretrained model
     parser.add_argument('--model', type=str, default='resnet12', choices=model_pool)
-    parser.add_argument('--model_path', type=str, default='/media/nyma/EXTERNAL1/rfs-master/models_pretrained/resnet12_miniImageNet_lr_0.05_decay_0.0005_trans_A_trial_1/S:resnet12_T:resnet12_miniImageNet_kd_r:1_a:0_b:0_trans_A_1/ckpt_epoch_100.pth', help='absolute path to .pth model')
+    parser.add_argument('--model_path', type=str, default='', help='absolute path to .pth model')
 
     # dataset
     parser.add_argument('--dataset', type=str, default='miniImageNet', choices=['miniImageNet', 'tieredImageNet',
@@ -63,10 +63,10 @@ def parse_option():
 
     # set the path according to the environment
     if hostname.startswith('visiongpu'):
-        opt.data_root = '/data/vision/phillipi/rep-learn/{}'.format(opt.dataset)
+        opt.data_root = '/data/{}'.format(opt.dataset)
         opt.data_aug = True
     elif hostname.startswith('nyma'):
-        opt.data_root = '/media/nyma/EXTERNAL2/Data/{}'.format(opt.dataset)
+        opt.data_root = '/media/{}'.format(opt.dataset)
         opt.data_aug = True
     elif opt.data_root != 'data':
         opt.data_aug = True
