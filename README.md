@@ -2,7 +2,7 @@
 <p align="center">
   <img width="700" height="180" src="imgs/OrthoShot-CAM.png">
 </p>
-Figure 3: Illustration of CAM plots. 
+
 # Ortho-shot Architecture
 <p align="center">
   <img width="700" height="400" src="imgs/OrthoShot3.png">
