@@ -1,6 +1,8 @@
 # Ortho-shot
-<img src='imgs/OrthoShot3.png' width=600/, align='centre'>
-
+<!-- <img src='imgs/OrthoShot3.png' width=600/, align='centre'> -->
+<p align="center">
+  <img width="600" height="200" src="imgs/OrthoShot3.png">
+</p>
 ## Installation
 
 This repo was tested with Ubuntu 16.04.5 LTS, Python 3.6, PyTorch 0.4.0, and CUDA release 7.5.
