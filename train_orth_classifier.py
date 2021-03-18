@@ -57,11 +57,11 @@ def parse_option():
     parser.add_argument('--cosine', action='store_true', help='using cosine annealing')
 
     # specify folder
-    parser.add_argument('--model_path', type=str, default='/media/nyma/EXTERNAL1/rfs-master/models',
+    parser.add_argument('--model_path', type=str, default='',
                         help='path to save model')
-    parser.add_argument('--tb_path', type=str, default='/media/nyma/EXTERNAL1/rfs-master/tensorboard',
+    parser.add_argument('--tb_path', type=str, default='',
                         help='path to tensorboard')
-    parser.add_argument('--data_root', type=str, default='/media/nyma/EXTERNAL2/Data/', help='path to data root')
+    parser.add_argument('--data_root', type=str, default='', help='path to data root')
 
     # meta setting
     parser.add_argument('--n_test_runs', type=int, default=600, metavar='N',
