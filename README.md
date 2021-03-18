@@ -1,12 +1,13 @@
 # Ortho-shot
-## Architecture
-<p align="center">
-  <img width="900" height="400" src="imgs/OrthoShot3.png">
-</p>
 ### CAM PLOTS
 <p align="center">
   <img width="1000" height="230" src="imgs/OrthoShot-CAM.png">
 </p>
+## Architecture
+<p align="center">
+  <img width="900" height="400" src="imgs/OrthoShot3.png">
+</p>
+
 
 ## Installation
 
