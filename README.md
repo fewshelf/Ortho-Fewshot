@@ -27,18 +27,18 @@ This repo was tested with Ubuntu 16.04.5 LTS, Python 3.6, PyTorch 0.4.0, and CUD
 
 # Pre-trained Models
 
-# Running
+## Running
 
 Exemplar commands for running the code can be found in `scripts/run.sh`.
 
-# supervised pre-training
+## supervised pre-training
 python train_orth_classifier.py --trial pretrain --model_path /path/to/save --tb_path /path/to/tensorboard --data_root /path/to/data_root
 
-# distillation
-# setting '-a 1.0' should give simimlar performance
+## distillation
+## setting '-a 1.0' should give simimlar performance
 python train_orth_distillation.py -r 0.5 -a 0.5 --path_t /path/to/teacher.pth --trial born1 --model_path /path/to/save --tb_path /path/to/tensorboard --data_root /path/to/data_root
 
-# evaluation
+## evaluation
 python eval_fewshot.py --model_path /path/to/student.pth --data_root /path/to/data_root
 
 
