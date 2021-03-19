@@ -59,7 +59,7 @@ def parse_option():
     parser.add_argument('--transform', type=str, default='A', choices=transforms_list)
 
     # path to teacher model
-    parser.add_argument('--path_t', type=str, default='', help='teacher model snapshot')
+    parser.add_argument('--path_t', type=str, default='/media/nyma/EXTERNAL1/rfs-master/models_pretrained/resnet12_miniImageNet_lr_0.05_decay_0.0005_trans_A_trial_1/ckpt_epoch_10.pth', help='teacher model snapshot')
 
     # distillation
     parser.add_argument('--distill', type=str, default='kd', choices=['kd', 'contrast', 'hint', 'attention'])
@@ -82,9 +82,9 @@ def parse_option():
     parser.add_argument('--cosine', action='store_true', help='using cosine annealing')
 
     # specify folder
-    parser.add_argument('--model_path', type=str, default='', help='path to save model')
-    parser.add_argument('--tb_path', type=str, default='', help='path to tensorboard')
-    parser.add_argument('--data_root', type=str, default='', help='path to data root')
+    parser.add_argument('--model_path', type=str, default='/media/nyma/EXTERNAL1/rfs-master/models_pretrained/resnet12_miniImageNet_lr_0.05_decay_0.0005_trans_A_trial_1', help='path to save model')
+    parser.add_argument('--tb_path', type=str, default='/media/nyma/EXTERNAL1/rfs-master/tensorboard', help='path to tensorboard')
+    parser.add_argument('--data_root', type=str, default='/media/nyma/EXTERNAL2/Data', help='path to data root')
 
     # setting for meta-learning
     parser.add_argument('--n_test_runs', type=int, default=600, metavar='N',
@@ -117,7 +117,7 @@ def parse_option():
     if not opt.tb_path:
         opt.tb_path = './tensorboard'
     if not opt.data_root:
-        opt.data_root = '//{}'.format(opt.dataset)
+        opt.data_root = '/media/nyma/EXTERNAL2/Data/{}'.format(opt.dataset)
     else:
         opt.data_root = '{}/{}'.format(opt.data_root, opt.dataset)
     opt.data_aug = True
