@@ -1,3 +1,4 @@
+# part of this work is Adapted from github.com/HobbitLong/RepDistiller and github.com/WangYueFt/rfs/
 from __future__ import print_function
 
 import os
@@ -12,6 +13,7 @@ import torch.optim as optim
 import torch.nn as nn
 import torch.backends.cudnn as cudnn
 from torch.utils.data import DataLoader
+from models.util import  orth_dist, deconv_orth_dist
 
 from models import model_pool
 from models.util import create_model
@@ -57,11 +59,11 @@ def parse_option():
     parser.add_argument('--cosine', action='store_true', help='using cosine annealing')
 
     # specify folder
-    parser.add_argument('--model_path', type=str, default='',
+    parser.add_argument('--model_path', type=str, default='/media/nyma/EXTERNAL1/rfs-master/models',
                         help='path to save model')
-    parser.add_argument('--tb_path', type=str, default='',
+    parser.add_argument('--tb_path', type=str, default='/media/nyma/EXTERNAL1/rfs-master/tensorboard',
                         help='path to tensorboard')
-    parser.add_argument('--data_root', type=str, default='', help='path to data root')
+    parser.add_argument('--data_root', type=str, default='/media/nyma/EXTERNAL2/Data/', help='path to data root')
 
     # meta setting
     parser.add_argument('--n_test_runs', type=int, default=600, metavar='N',
@@ -274,6 +276,22 @@ def train(epoch, train_loader, model, criterion, optimizer, opt):
 
         # ===================forward=====================
         output = model(input)
+
+        # choose layers depending on Model (use - print(model)) to verify layers. # Resnet-12 was used as reference
+        diff = orth_dist(model.layer2[0].downsample[0].weight) + orth_dist(
+            model.layer3[0].downsample[0].weight) + orth_dist(model.layer4[0].downsample[0].weight)
+
+        diff += deconv_orth_dist(model.layer1[0].conv1.weight, stride=1) + deconv_orth_dist(
+            model.layer1[0].conv3.weight, stride=1)
+
+        diff += deconv_orth_dist(model.layer2[0].conv1.weight, stride=1) + deconv_orth_dist(
+            model.layer2[0].conv3.weight, stride=1)
+
+        diff += deconv_orth_dist(model.layer3[0].conv1.weight, stride=1) + deconv_orth_dist(
+            model.layer3[0].conv3.weight, stride=1)
+
+        diff += deconv_orth_dist(model.layer4[0].conv1.weight, stride=1) + deconv_orth_dist(
+            model.layer4[0].conv3.weight, stride=1)
         loss = criterion(output, target)
 
         acc1, acc5 = accuracy(output, target, topk=(1, 5))
