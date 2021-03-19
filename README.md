@@ -25,9 +25,9 @@ This repo was tested with Ubuntu 16.04.5 LTS, Python 3.6, PyTorch 0.4.0, and CUD
 - [miniimagenet](https://www.dropbox.com/sh/6yd1ygtyc3yd981/AADaG1GvNdXkHnjynhZY6TBia/miniImageNet.tar.gz?dl=0)
 - [tieredImageNet](https://www.dropbox.com/sh/6yd1ygtyc3yd981/AABg-ODoQp1JEzhIt7q5GofVa/tieredImageNet.tar.gz?dl=0)
 
-### Pre-trained Models
+# Pre-trained Models
 
-### Running
+# Running
 
 Exemplar commands for running the code can be found in `scripts/run.sh`.
 
