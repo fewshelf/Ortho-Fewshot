@@ -186,7 +186,7 @@ if __name__ == '__main__':
     args.n_ways = 5
     args.n_shots = 1
     args.n_queries = 12
-    args.data_root = '/media/nyma/EXTERNAL2/Data/Stanford_cars/car_pickle'
+    args.data_root = '' #Enter data root
     args.data_aug = True
     args.n_test_runs = 5
     args.n_aug_support_samples = 1
