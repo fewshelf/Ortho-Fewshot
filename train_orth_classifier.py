@@ -278,6 +278,7 @@ def train(epoch, train_loader, model, criterion, optimizer, opt):
         output = model(input)
 
         # choose layers depending on Model (use - print(model)) to verify layers. # Resnet-12 was used as reference
+         # ===================Orthogonal Regularization====================
         diff = orth_dist(model.layer2[0].downsample[0].weight) + orth_dist(
             model.layer3[0].downsample[0].weight) + orth_dist(model.layer4[0].downsample[0].weight)
 
