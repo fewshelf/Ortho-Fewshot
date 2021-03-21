@@ -8,7 +8,7 @@ from torch.utils.data import Dataset
 import torchvision.transforms as transforms
 
 
-class StanfordCars(Dataset):
+class CubBirds(Dataset):
     def __init__(self, args, partition='train', pretrain=True, is_sample=False, k=4096,
                  transform=None):
         super(Dataset, self).__init__()
@@ -41,9 +41,9 @@ class StanfordCars(Dataset):
             self.transform = transform
 
         if self.pretrain:
-            self.file_pattern = 'stanfordCars_category_split_train_phase_%s.pickle'
+            self.file_pattern = 'cubbirds_category_split_train_phase_%s.pickle'
         else:
-            self.file_pattern = 'stanfordCars_category_split_train_phase_%s.pickle'  # 'stanfordCars_category_split_%s.pickle'
+            self.file_pattern = 'cubbirds_category_split_train_phase_%s.pickle'  # 'stanfordCars_category_split_%s.pickle'
         self.data = {}
         print(self.data_root, self.file_pattern)
 
@@ -100,10 +100,10 @@ class StanfordCars(Dataset):
         return len(self.labels)
 
 
-class MetaStanfordCars(StanfordCars):
+class MetaCubBirds(CubBirds):
 
     def __init__(self, args, partition='train', train_transform=None, test_transform=None, fix_seed=True):
-        super(MetaStanfordCars, self).__init__(args, partition, False)
+        super(MetaCubBirds, self).__init__(args, partition, False)
         self.fix_seed = fix_seed
         self.n_ways = args.n_ways
         self.n_shots = args.n_shots
@@ -186,15 +186,15 @@ if __name__ == '__main__':
     args.n_ways = 5
     args.n_shots = 1
     args.n_queries = 12
-    args.data_root = '/media/nyma/EXTERNAL2/Data/Stanford_cars/car_pickle'
+    args.data_root = '/media/nyma/EXTERNAL2/Data/Stanford_cars/cubbird_pickle'
     args.data_aug = True
     args.n_test_runs = 5
     args.n_aug_support_samples = 1
-    imagenet = MetaStanfordCars(args, 'val')
+    imagenet = MetaCubBirds(args, 'val')
     print(len(imagenet))
     print(imagenet.__getitem__(1)[0].shape)
 
-    metaimagenet = MetaStanfordCars(args)
+    metaimagenet = MetaCubBirds(args)
     print(len(metaimagenet))
     print(metaimagenet.__getitem__(1)[0].size())
     print(metaimagenet.__getitem__(1)[1].shape)
