@@ -43,7 +43,7 @@ class StanfordDogs(Dataset):
         if self.pretrain:
             self.file_pattern = 'stanfordDogs_category_split_train_phase_%s.pickle'
         else:
-            self.file_pattern = 'stanfordDogs_category_split_train_phase_%s.pickle'  # 'stanfordCars_category_split_%s.pickle'
+            self.file_pattern = 'stanfordDogs_category_split_train_phase_%s.pickle'  
         self.data = {}
         print(self.data_root, self.file_pattern)
 
@@ -186,7 +186,7 @@ if __name__ == '__main__':
     args.n_ways = 5
     args.n_shots = 1
     args.n_queries = 12
-    args.data_root = '/media/nyma/EXTERNAL2/Data/Stanford_cars/dog_pickle'
+    args.data_root = ''
     args.data_aug = True
     args.n_test_runs = 5
     args.n_aug_support_samples = 1
