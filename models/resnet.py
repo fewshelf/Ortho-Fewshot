@@ -92,6 +92,9 @@ class BasicBlock(nn.Module):
                  block_size=1, use_se=False):
         super(BasicBlock, self).__init__()
         self.conv1 = conv3x3(inplanes, planes)
+        self.conv_max = conv3x3(64, 64)
+        self.conv_avg = conv3x3(64, 42)
+        self.sattn = SATTN()
         self.bn1 = nn.BatchNorm2d(planes)
         self.relu = nn.LeakyReLU(0.1)
         self.conv2 = conv3x3(planes, planes)
@@ -99,6 +102,7 @@ class BasicBlock(nn.Module):
         self.conv3 = conv3x3(planes, planes)
         self.bn3 = nn.BatchNorm2d(planes)
         self.maxpool = nn.MaxPool2d(stride)
+        self.avgpool = nn.AdaptiveAvgPool2d(stride)
         self.downsample = downsample
         self.stride = stride
         self.drop_rate = drop_rate
@@ -116,15 +120,14 @@ class BasicBlock(nn.Module):
         residual = x
 
         out = self.conv1(x)
-        out = self.bn1(out)
         out = self.relu(out)
-
         out = self.conv2(out)
         out = self.bn2(out)
         out = self.relu(out)
 
         out = self.conv3(out)
         out = self.bn3(out)
+        out = self.sattn(out)
         if self.use_se:
             out = self.se(out)
 
@@ -145,6 +148,48 @@ class BasicBlock(nn.Module):
 
         return out
 
+
+class BasicConv(nn.Module):
+    def __init__(self, in_planes, out_planes, kernel_size, stride=1, padding=0, dilation=1, groups=1, relu=True, bn=True, bias=False):
+        super(BasicConv, self).__init__()
+        self.out_channels = out_planes
+        self.conv = nn.Conv2d(in_planes, out_planes, kernel_size=kernel_size, stride=stride, padding=padding, dilation=dilation, groups=groups, bias=bias)
+        self.bn = nn.BatchNorm2d(out_planes,eps=1e-5, momentum=0.01, affine=True) if bn else None
+        self.relu = nn.ReLU() if relu else None
+
+    def forward(self, x):
+        x = self.conv(x)
+        if self.bn is not None:
+            x = self.bn(x)
+        if self.relu is not None:
+            x = self.relu(x)
+        return x
+
+
+class ChannelPool(nn.Module):
+    def forward(self, x):
+        return torch.cat( (torch.max(x,1)[0].unsqueeze(1), torch.mean(x,1).unsqueeze(1)), dim=1 )
+
+
+class SpatialGate(nn.Module):
+    def __init__(self):
+        super(SpatialGate, self).__init__()
+        kernel_size = 7
+        self.compress = ChannelPool()
+        self.spatial = BasicConv(2, 1, kernel_size, stride=1, padding=(kernel_size-1) // 2, relu=False)
+    def forward(self, x):
+        x_compress = self.compress(x)
+        x_out = self.spatial(x_compress)
+        scale = F.sigmoid(x_out) # broadcasting
+        return x * scale
+
+class SATTN(nn.Module):
+    def __init__(self):
+        super(SATTN, self).__init__()
+        self.SpatialGate = SpatialGate()
+    def  forward(self, x):
+        x_out = self.SpatialGate(x)
+        return x_out
 
 class ResNet(nn.Module):
 
@@ -209,6 +254,7 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x, is_feat=False):
+
         x = self.layer1(x)
         f0 = x
         x = self.layer2(x)
@@ -217,10 +263,12 @@ class ResNet(nn.Module):
         f2 = x
         x = self.layer4(x)
         f3 = x
+
         if self.keep_avg_pool:
             x = self.avgpool(x)
         x = x.view(x.size(0), -1)
         feat = x
+
         if self.num_classes > 0:
             x = self.classifier(x)
 
