@@ -92,8 +92,6 @@ class BasicBlock(nn.Module):
                  block_size=1, use_se=False):
         super(BasicBlock, self).__init__()
         self.conv1 = conv3x3(inplanes, planes)
-        self.conv_max = conv3x3(64, 64)
-        self.conv_avg = conv3x3(64, 42)
         self.sattn = SATTN()
         self.bn1 = nn.BatchNorm2d(planes)
         self.relu = nn.LeakyReLU(0.1)
